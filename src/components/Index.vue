@@ -2,6 +2,7 @@
   <div class="index">
     <div class="index-content">
       <div class="card" v-for="drink in drinks" :key="drink.id">
+        <i class="card-remove" @click="deleteDrink(drink.id)">X</i>
         <h2 class="card-title">{{ drink.title }}</h2>
         <ul class="ingredients">
           <li v-for="(ing, index) in drink.ingredients" :key="index">
@@ -37,6 +38,13 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    deleteDrink(id) {
+      this.drinks = this.drinks.filter(drink => {
+        return drink.id != id;
+      });
+    }
   }
 };
 </script>
@@ -66,6 +74,16 @@ export default {
   border-radius: 5px;
   margin: 0 10px;
   text-align: center;
+  position: relative;
+}
+.card-remove {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
 }
 .card-title {
   font-size: 18px;
