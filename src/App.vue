@@ -120,6 +120,11 @@ section {
 }
 body {
   line-height: 1;
+  color: #747474;
+  font-family: "PT Sans", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 17px;
 }
 ol,
 ul {
