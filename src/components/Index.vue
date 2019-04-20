@@ -15,28 +15,13 @@
 </template>
 
 <script>
+import db from "@/firebase/init";
+
 export default {
   name: "Index",
   data() {
     return {
-      drinks: [
-        {
-          title: "Vodka with lemon",
-          slug: "vodka-with-lemon",
-          ingredients: ["2 ounce of vodka", "Slice of lemon", "2 ice cube"],
-          id: 1
-        },
-        {
-          title: "Girl Scout Cookie Cocktail",
-          slug: "girl-scout-cookie-cocktail",
-          ingredients: [
-            "1/2 ounce coffee liqueur",
-            "1/2 ounce ​Irish cream liqueur",
-            "1/2 ounce ​peppermint schnapps"
-          ],
-          id: 2
-        }
-      ]
+      drinks: []
     };
   },
   methods: {
@@ -45,6 +30,18 @@ export default {
         return drink.id != id;
       });
     }
+  },
+  created() {
+    // Fetch data from the firestorm
+    db.collection("drinks")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let drink = doc.data();
+          drink.id = doc.id;
+          this.drinks.push(drink);
+        });
+      });
   }
 };
 </script>
