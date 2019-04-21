@@ -10,7 +10,7 @@
         <div v-for="(ingredient, index) in ingredients" :key="index">
           <label for="ingredient">Ingredient:</label>
           <input type="text" name="ingredient" v-model="ingredients[index]">
-          <span class="remove-ing" @click="deleteIng(ingredient)">X</span>
+          <i class="ingredient-remove fas fa-trash-alt" @click="deleteIng(ingredient)"></i>
         </div>
         <div>
           <span class="hint">Press tab to add</span>
@@ -122,14 +122,15 @@ export default {
   border: 1px solid #e8e8e8;
   padding: 6px 12px;
 }
-.remove-ing {
-  color: red;
-  font-size: 18px;
-  font-weight: bold;
+.ingredient-remove {
   position: absolute;
-  right: 5px;
-  top: 28px;
+  right: -5px;
+  top: 17px;
   cursor: pointer;
+  background-color: red;
+  padding: 10px;
+  border-radius: 50%;
+  color: #fff;
 }
 .hint {
   font-size: 12px;
