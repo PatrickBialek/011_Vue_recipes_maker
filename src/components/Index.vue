@@ -26,9 +26,14 @@ export default {
   },
   methods: {
     deleteDrink(id) {
-      this.drinks = this.drinks.filter(drink => {
-        return drink.id != id;
-      });
+      db.collection("drinks")
+        .doc(id)
+        .delete()
+        .then(() => {
+          this.drinks = this.drinks.filter(drink => {
+            return drink.id != id;
+          });
+        });
     }
   },
   created() {
@@ -67,7 +72,7 @@ export default {
   width: 300px;
   padding: 15px 10px;
   box-sizing: border-box;
-  border: 1px dashed #ccc;
+  border: 1px solid #e8e8e8;
   border-radius: 5px;
   margin: 0 10px;
   text-align: center;

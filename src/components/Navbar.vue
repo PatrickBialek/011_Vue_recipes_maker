@@ -1,14 +1,13 @@
 <template>
   <nav class="nav-bar">
     <div class="nav-bar-content">
-      <router-link to>
+      <router-link :to="{name: 'Index'}">
         <div class="nav-bar-logo-box">
           <img src="@/assets/drink-logo.png">
         </div>
       </router-link>
       <a href class="nav-bar-add-box">
-        <span>{{ btnText }}</span>
-        <router-link to>
+        <router-link :to="{name: 'AddDrink'}">
           <i class="nav-bar-add-btn">+</i>
         </router-link>
       </a>
@@ -33,7 +32,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   justify-content: center;
-  border-bottom: 1px dashed #ccc;
+  border-bottom: 1px solid #e8e8e8;
 }
 .nav-bar,
 .nav-bar-content,
@@ -61,6 +60,9 @@ export default {
 .nav-bar-add-btn {
   border-radius: 50%;
   background-color: #43b02a;
+}
+.nav-bar-add-box {
+  cursor: default;
 }
 .nav-bar-add-box span {
   margin-right: 10px;
