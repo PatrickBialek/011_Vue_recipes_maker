@@ -74,7 +74,7 @@ export default {
   box-sizing: border-box;
   border: 1px solid #e8e8e8;
   border-radius: 5px;
-  margin: 0 10px;
+  margin: 0 10px 20px;
   text-align: center;
   position: relative;
 }

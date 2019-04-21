@@ -10,6 +10,7 @@
         <div v-for="(ingredient, index) in ingredients" :key="index">
           <label for="ingredient">Ingredient:</label>
           <input type="text" name="ingredient" v-model="ingredients[index]">
+          <span class="remove-ing" @click="deleteIng(ingredient)">X</span>
         </div>
         <div>
           <span class="hint">Press tab to add</span>
@@ -41,13 +42,24 @@ export default {
     addDrink() {
       if (this.title && this.ingredients.length != 0) {
         this.feedback = null;
-        const slug = this.title.toLowerCase().replace(/ /g, "-");
+        const slug = this.title
+          .toLowerCase()
+          .replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, "")
+          .replace(/ /g, "-");
         this.slug = slug;
 
-        db.colletion("drinks").add({
-          title: this.title,
-          ingredients: this.ingredients
-        });
+        db.collection("drinks")
+          .add({
+            title: this.title,
+            ingredients: this.ingredients,
+            slug: this.slug
+          })
+          .then(() => {
+            this.$router.push({ name: "Index" });
+          })
+          .catch(error => {
+            console.log(error);
+          });
       } else {
         this.feedback =
           "To add a drink you have to add title and requied ingredients";
@@ -61,6 +73,11 @@ export default {
       } else {
         this.feedback = "You must enter a value to add an ingredient";
       }
+    },
+    deleteIng(ingredientToRemove) {
+      this.ingredients = this.ingredients.filter(ingredient => {
+        return ingredient != ingredientToRemove;
+      });
     }
   }
 };
@@ -95,6 +112,7 @@ export default {
   flex-direction: column;
   text-align: left;
   margin-bottom: 16px;
+  position: relative;
 }
 .add-drink-form label {
   font-size: 16px;
@@ -103,6 +121,15 @@ export default {
 .add-drink-form input[type="text"] {
   border: 1px solid #e8e8e8;
   padding: 6px 12px;
+}
+.remove-ing {
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  right: 5px;
+  top: 28px;
+  cursor: pointer;
 }
 .hint {
   font-size: 12px;
