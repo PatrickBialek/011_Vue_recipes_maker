@@ -3,9 +3,9 @@
     <div class="index-content">
       <div class="card" v-for="drink in drinks" :key="drink.id">
         <i class="card-remove fas fa-trash-alt" @click="deleteDrink(drink.id)"></i>
-        <i class="card-edit fas fa-pen">
-          <router-link :to="{name: 'EditDrink', params: {drink_slug: drink.slug}}"></router-link>
-        </i>
+        <router-link :to="{name: 'EditDrink', params: {drink_slug: drink.slug}}">
+          <i class="card-edit fas fa-pen"></i>
+        </router-link>
         <h2 class="card-title">{{ drink.title }}</h2>
         <ul class="ingredients">
           <li v-for="(ing, index) in drink.ingredients" :key="index">
