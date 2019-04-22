@@ -3,7 +3,10 @@
     <div class="index-content">
       <div class="card" v-for="drink in drinks" :key="drink.id">
         <i class="card-remove fas fa-trash-alt" @click="deleteDrink(drink.id)"></i>
-        <router-link :to="{name: 'EditDrink', params: {drink_slug: drink.slug}}">
+        <router-link
+          class="card-edit-link"
+          :to="{name: 'EditDrink', params: {drink_slug: drink.slug}}"
+        >
           <i class="card-edit fas fa-pen"></i>
         </router-link>
         <h2 class="card-title">{{ drink.title }}</h2>
@@ -81,15 +84,21 @@ export default {
   text-align: center;
   position: relative;
 }
-.card-edit,
-.card-remove {
+.card-remove,
+.card-edit-link {
   display: block;
   position: absolute;
   cursor: pointer;
-  padding: 7px;
+  right: 5px;
+}
+.card-edit-link {
+  top: 45px;
+}
+.card-edit,
+.card-remove {
   border-radius: 50%;
   color: #fff;
-  right: 5px;
+  padding: 7px;
 }
 .card-remove {
   background-color: red;
