@@ -70,9 +70,9 @@ export default {
 .index-content {
   max-width: 1500px;
   margin: 0 auto;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
-  align-items: end;
+  align-items: stretch;
 }
 .card {
   width: 300px;
